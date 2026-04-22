@@ -9,7 +9,6 @@ export const registerUser = createAsyncThunk(
         try {
             const res = await api.post("/auth/register", data);
 
-            localStorage.setItem("token", res.data.token);
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response.data);
@@ -24,7 +23,6 @@ export const loginUser = createAsyncThunk(
         try {
             const res = await api.post("/auth/login", data);
 
-            localStorage.setItem("token", res.data.token);
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response.data);
@@ -36,8 +34,6 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
     await api.post("/auth/logout");
 
-
-    localStorage.removeItem("token");
 });
 
 const authSlice = createSlice({
